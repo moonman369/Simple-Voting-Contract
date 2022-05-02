@@ -31,7 +31,9 @@ contract SimpleVoting is Context {
 
     mapping(address => Voter) public voters;
 
-    Proposal[] public proposals;
+    Proposal[] proposals;
+
+    uint256[] winningProposals;
 
     event VotingStarted (address _chairPerson, uint256 _proposalCount);
 
@@ -55,6 +57,22 @@ contract SimpleVoting is Context {
         _;
     }
 
+    modifier proposalExists (uint256 _proposalIndex) {
+        require (
+            _proposalIndex < proposalCount, 
+            "SimpleVoting: Proposal index out of bounds."
+        );
+        _;
+    }
+
+    modifier hasRightToVote (address _voter) {
+        require (
+            voters[_voter].weight > 0,
+            "SimpleVoting: Caller does not have right to vote."
+        );
+        _;
+    }
+
     
 
     /** 
@@ -65,21 +83,31 @@ contract SimpleVoting is Context {
         chairPerson = _msgSender();
         voters[chairPerson].weight = 1;
         proposalCount = proposalNames.length;
-        for (uint i = 0; i < proposalCount; i. add(1)) {
+        for (uint i = 0; i < proposalCount; i = i. add(1)) {
             // 'Proposal({...})' creates a temporary
             // Proposal object and 'proposals.push(...)'
             // appends it to the end of 'proposals'.
             Proposal memory proposal = Proposal (stringToBytes32(proposalNames[i]), 0);
             proposals.push(proposal);
         }
-        //emit VotingStarted (chairPerson, proposalCount);
+        emit VotingStarted (chairPerson, proposalCount);
     }
+
+    function getProposal (uint256 _proposalIndex) public view proposalExists(_proposalIndex) returns (string memory proposalName_, uint256 voteCount_) {
+        (proposalName_, voteCount_) = 
+        (bytes32ToString (proposals[_proposalIndex].name), proposals[_proposalIndex].voteCount);
+    }
+
+    function getWinningProposals () public returns (uint256[] memory){
+        computeWinningProposals();
+        return winningProposals;
+    } 
     
     /** 
      * @dev Give 'voter' the right to vote on this ballot. May only be called by 'chairPerson'.
      * @param _voter address of voter
      */
-    function giveRightToVote(address _voter) public onlyChairPerson () notYetVoted (_voter) {
+    function giveRightToVote(address _voter) public onlyChairPerson() notYetVoted(_voter) {
         // require(
         //     _msgSender() == chairPerson,
         //     "Only chairPerson can give right to vote."
@@ -96,10 +124,11 @@ contract SimpleVoting is Context {
      * @dev Delegate your vote to the voter 'to'.
      * @param _to address to which vote is delegated
      */
-    function delegate(address _to) public notYetVoted (_msgSender()) {
+    function delegate(address _to) public notYetVoted (_msgSender()) hasRightToVote (_msgSender()) {
+        // require (voters[_msgSender()].weight > 0, "SimpleVoting: Caller does not have right to vote.");
         Voter storage sender = voters[_msgSender()];
         //require(!sender.voted, "You already voted.");
-        require(_to != _msgSender(), "SimpleVoting: Self-delegation is not allowed.");
+        require (_to != _msgSender(), "SimpleVoting: Self-delegation is not allowed.");
 
         while (voters[_to].delegate != address(0)) {
             _to = voters[_to].delegate;
@@ -127,11 +156,10 @@ contract SimpleVoting is Context {
      * @dev Give your vote (including votes delegated to you) to proposal 'proposals[proposal].name'.
      * @param proposal index of proposal in the proposals array
      */
-    function vote(uint proposal) public {
+    function vote(uint proposal) public proposalExists(proposal) notYetVoted(_msgSender()) hasRightToVote(_msgSender()) {
         Voter storage sender = voters[_msgSender()];
-        require(sender.weight != 0, "Has no right to vote");
-        require(!sender.voted, "Already voted.");
-        require (proposal < proposalCount, "SimpleVoting: Proposal index out of bounds.");
+        // require(sender.weight != 0, "SimpleVoting: Caller has no right to vote");
+        // require(!sender.voted, "SimpleVoting: Voter has already casted their vote.");
         sender.voted = true;
         sender.vote = proposal;
 
@@ -145,29 +173,33 @@ contract SimpleVoting is Context {
 
     /** 
      * @dev Computes the winning proposal taking all previous votes into account.
-     * @return winningProposal_ index of winning proposal in the proposals array
      */
-    function winningProposal() public view
-            returns (uint256 winningProposal_)
+    function computeWinningProposals() internal 
     {
-        uint winningVoteCount = 0;
-        for (uint p = 0; p < proposals.length; p. add(1)) {
+        uint winningVoteCount = 0; uint256 winner = 0;
+        for (uint p = 0; p < proposals.length; p++) {
             if (proposals[p].voteCount > winningVoteCount) {
                 winningVoteCount = proposals[p].voteCount;
-                winningProposal_ = p;
+                winningProposals.push(p);
+            }
+        }
+        for (uint p = 0; p < proposals.length; p++) {
+            if (proposals[p].voteCount == proposals[winner].voteCount) {
+                 winningProposals.push(p);
             }
         }
     }
 
     /** 
      * @dev Calls winningProposal() function to get the index of the winner contained in the proposals array and then
-     * @return winnerName_ the name of the winner
+     * @return winnerNames_ the name of the winner
      */
-    function winnerName() 
-        public 
-        view
-        returns (string memory) {
-            return bytes32ToString(proposals[winningProposal()].name);
+    function winnerNames() public view
+            returns (string memory winnerNames_)
+    {
+        for (uint256 i = 0; i < winningProposals.length; i = i. add(1)) {
+            winnerNames_ = string (bytes.concat(bytes(winnerNames_)," ",abi.encodePacked(proposals[winningProposals[i]].name)));
+        }
     }
 
     function stringToBytes32 (string memory str) 

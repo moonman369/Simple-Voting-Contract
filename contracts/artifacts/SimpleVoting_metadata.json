@@ -108,6 +108,43 @@
 			{
 				"inputs": [
 					{
+						"internalType": "uint256",
+						"name": "_proposalIndex",
+						"type": "uint256"
+					}
+				],
+				"name": "getProposal",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "proposalName_",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "voteCount_",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getWinningProposals",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "address",
 						"name": "_voter",
 						"type": "address"
@@ -125,30 +162,6 @@
 					{
 						"internalType": "uint256",
 						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "proposals",
-				"outputs": [
-					{
-						"internalType": "bytes32",
-						"name": "name",
-						"type": "bytes32"
-					},
-					{
-						"internalType": "uint256",
-						"name": "voteCount",
 						"type": "uint256"
 					}
 				],
@@ -204,25 +217,12 @@
 			},
 			{
 				"inputs": [],
-				"name": "winnerName",
+				"name": "winnerNames",
 				"outputs": [
 					{
 						"internalType": "string",
-						"name": "",
+						"name": "winnerNames_",
 						"type": "string"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "winningProposal",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "winningProposal_",
-						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -257,16 +257,10 @@
 						"proposal": "index of proposal in the proposals array"
 					}
 				},
-				"winnerName()": {
+				"winnerNames()": {
 					"details": "Calls winningProposal() function to get the index of the winner contained in the proposals array and then",
 					"returns": {
-						"_0": "winnerName_ the name of the winner"
-					}
-				},
-				"winningProposal()": {
-					"details": "Computes the winning proposal taking all previous votes into account.",
-					"returns": {
-						"winningProposal_": "index of winning proposal in the proposals array"
+						"winnerNames_": "the name of the winner"
 					}
 				}
 			},
@@ -296,11 +290,11 @@
 	},
 	"sources": {
 		"contracts/SimpleVoting.sol": {
-			"keccak256": "0x7f19850e493700068948da4b8e6b4e4f239b3225601b8812d7a1d9b0449b3666",
+			"keccak256": "0xb23086c03bc54db6ed95a62afb17a1f2d9eea61fa668b48024d9890ee5a58aaf",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e46b58baefb66412799f5c965e9df141f1b35163173627419a3e4f8ee8b014ac",
-				"dweb:/ipfs/QmWdscopfy2EMrm4VLyASARKvnvj7SKcJgkqP1sYoStgKJ"
+				"bzz-raw://3f07c77d5221a7f566fa90086efc3f99da304b0f2df4959b1a99ea26ca3eb31d",
+				"dweb:/ipfs/QmZ8tGc2v88LgVuX4jfd7iMchydsQU2skJa2M9RyBEXyKj"
 			]
 		},
 		"https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Context.sol": {
