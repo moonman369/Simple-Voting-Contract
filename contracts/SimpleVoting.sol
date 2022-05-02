@@ -177,6 +177,7 @@ contract SimpleVoting is Context {
     function computeWinningProposals() internal 
     {
         uint winningVoteCount = 0; uint256 winner = 0;
+        delete winningProposals;
         for (uint p = 0; p < proposals.length; p = p. add(1)) {
             if (proposals[p].voteCount > winningVoteCount) {
                 winningVoteCount = proposals[p].voteCount;
