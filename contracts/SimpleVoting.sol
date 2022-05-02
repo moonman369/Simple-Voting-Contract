@@ -177,14 +177,14 @@ contract SimpleVoting is Context {
     function computeWinningProposals() internal 
     {
         uint winningVoteCount = 0; uint256 winner = 0;
-        for (uint p = 0; p < proposals.length; p++) {
+        for (uint p = 0; p < proposals.length; p = p. add(1)) {
             if (proposals[p].voteCount > winningVoteCount) {
                 winningVoteCount = proposals[p].voteCount;
                 winningProposals.push(p);
             }
         }
-        for (uint p = 0; p < proposals.length; p++) {
-            if (proposals[p].voteCount == proposals[winner].voteCount) {
+        for (uint p = 0; p < proposals.length; p = p. add(1)) {
+            if (proposals[p].voteCount == proposals[winner].voteCount && p != winner) {
                  winningProposals.push(p);
             }
         }
