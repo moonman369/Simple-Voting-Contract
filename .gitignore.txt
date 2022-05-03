@@ -1,0 +1,2 @@
+#Ignore built-info
+contracts/artifacts/build-info
