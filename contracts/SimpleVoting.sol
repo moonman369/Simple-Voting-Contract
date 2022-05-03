@@ -41,7 +41,7 @@ contract SimpleVoting is Context {
 
     event VoteCasted (uint256 indexed _proposal, address indexed _voter, uint256 _votesAdded);    // event to broadcast the casting of a vote
 
-    event DelegationSuccessful (address indexed _from, address indexed _to);
+    event DelegationSuccessful (address indexed _from, address indexed _to);    // event to broadcast a delegation
 
     modifier onlyChairPerson () {
          require(
@@ -51,6 +51,9 @@ contract SimpleVoting is Context {
         _;
      }
 
+    /** 
+     * @dev Modifier: Checks if a voter has not voted yet, reverts if voted.
+     */
     modifier notYetVoted (address _voter) {
          require(
             !voters[_voter].voted,
@@ -59,6 +62,10 @@ contract SimpleVoting is Context {
         _;
     }
 
+    /** 
+     * @dev Modifier: Checks if a proposal exists in the proposals array.
+     * @param _proposalIndex proposal index
+     */
     modifier proposalExists (uint256 _proposalIndex) {
         require (
             _proposalIndex < proposalCount, 
