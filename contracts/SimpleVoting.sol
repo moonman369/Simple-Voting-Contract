@@ -27,19 +27,19 @@ contract SimpleVoting is Context {
         uint voteCount; // number of accumulated votes
     }
 
-    uint256 public proposalCount;
+    uint256 public proposalCount;   // stores the total number of proposals
 
-    address public chairPerson;
+    address public chairPerson;     // stores the address of the deployer who is the chair person of the voting ballot
 
-    mapping(address => Voter) public voters;
+    mapping(address => Voter) public voters;    // maps voter addresses to voter structures
 
-    Proposal[] proposals;
+    Proposal[] proposals;   // array of all the proposal structures created
 
-    uint256[] winningProposals;
+    uint256[] winningProposals;    // integer array storing the indices of ALL the winiing proposals
 
-    event VotingStarted (address _chairPerson, uint256 _proposalCount);
+    event VotingStarted (address _chairPerson, uint256 _proposalCount);    // event to broadcast the deployment of the voting contract
 
-    event VoteCasted (uint256 indexed _proposal, address indexed _voter, uint256 _votesAdded);
+    event VoteCasted (uint256 indexed _proposal, address indexed _voter, uint256 _votesAdded);    // event to broadcast the casting of a vote
 
     event DelegationSuccessful (address indexed _from, address indexed _to);
 

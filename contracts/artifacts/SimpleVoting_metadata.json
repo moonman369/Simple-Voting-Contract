@@ -300,11 +300,11 @@
 	},
 	"sources": {
 		"contracts/SimpleVoting.sol": {
-			"keccak256": "0xc3c75feee5f192aac5ce8c2953f47d201ff6cec8348ce538335e04c4a2033672",
+			"keccak256": "0x566620407cf4a852255dde87fbe107a3295c941af4b6df090719a549e723057a",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://0ed21547fb9d454293013dabb1dbb3101daef6393842dbdb1dc10aec7e0dd967",
-				"dweb:/ipfs/Qmc3x84dseLKmjGKpqRxsoN7ZwfGMH8CmFosK5bebN8bQu"
+				"bzz-raw://4f123e88582ba79ef39394f3623c66263dbb33383d4308776560608b6c440e81",
+				"dweb:/ipfs/QmcJJVFn6V5MQrag8SXD9zQvABWpZdvqHDUUVG25eTQ3jR"
 			]
 		},
 		"https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Context.sol": {
