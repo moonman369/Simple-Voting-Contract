@@ -14,12 +14,13 @@ contract SimpleVoting is Context {
    
     //Structure to store the data of a voter
     struct Voter {
-        uint weight; // weight is accumulated by delegation
-        bool voted;  // true if that voter has already voted
-        address delegate; // address, the voter delegated their vote to
-        uint vote;   // index of the voted proposal
+        uint weight;     // weight is accumulated by delegation
+        bool voted;      // true if that voter has already voted
+        address delegate;// address, the voter delegated their vote to
+        uint vote;       // index of the proposal that was voted in favor of
     }
 
+    //Structure to store the data of a proposal
     struct Proposal {
         // If you can limit the length to a certain number of bytes, always use one of bytes1 to bytes32 because they are much cheaper
         bytes32 name;   // short name (up to 32 bytes)
