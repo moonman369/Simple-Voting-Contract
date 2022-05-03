@@ -98,8 +98,7 @@ contract SimpleVoting is Context {
         (bytes32ToString (proposals[_proposalIndex].name), proposals[_proposalIndex].voteCount);
     }
 
-    function getWinningProposals () public returns (uint256[] memory){
-        computeWinningProposals();
+    function getWinningProposals () public view returns (uint256[] memory){
         return winningProposals;
     } 
     
@@ -174,7 +173,7 @@ contract SimpleVoting is Context {
     /** 
      * @dev Computes the winning proposal taking all previous votes into account.
      */
-    function computeWinningProposals() internal 
+    function computeWinningProposals() public 
     {
         uint winningVoteCount = 0; uint256 winner = 0;
         delete winningProposals;

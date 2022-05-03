@@ -93,6 +93,13 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "computeWinningProposals",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -139,7 +146,7 @@
 						"type": "uint256[]"
 					}
 				],
-				"stateMutability": "nonpayable",
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -233,6 +240,9 @@
 			"details": "Implements voting process along with vote delegation",
 			"kind": "dev",
 			"methods": {
+				"computeWinningProposals()": {
+					"details": "Computes the winning proposal taking all previous votes into account."
+				},
 				"constructor": {
 					"details": "Create a new ballot to choose one of 'proposalNames'.",
 					"params": {
@@ -290,11 +300,11 @@
 	},
 	"sources": {
 		"contracts/SimpleVoting.sol": {
-			"keccak256": "0xc67c6aa701f7924d2a49ed2720cabb0d94579243d3b013ede721788601aaf1ad",
+			"keccak256": "0xdd620dafc1351b83c881d0c66dd9a7a0e56f9634c281531dbe700ed961837049",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://79e80dd0ef684ecb3cd80d327df210f12c64519ed4ba8fb262295fc05be86885",
-				"dweb:/ipfs/QmbCi2hZ4tn7LAeV6aWc7VkAt4ydbgzGvGNwh9tfkWbSx9"
+				"bzz-raw://2eaf77d5b7f4715db50eaaf768e6a2b5775f2030110bb0f9dd122e87d5533eed",
+				"dweb:/ipfs/QmV7XRcs9qPmoW2JGq7MoTjyeWdZxFR47k8hBJU4MVPLCh"
 			]
 		},
 		"https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Context.sol": {
