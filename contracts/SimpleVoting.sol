@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.13;
 
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Context.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/math/SafeMath.sol";
@@ -199,7 +199,7 @@ contract SimpleVoting is Context {
             returns (string memory winnerNames_)
     {
         for (uint256 i = 0; i < winningProposals.length; i = i. add(1)) {
-            winnerNames_ = string (bytes.concat(bytes(winnerNames_)," ",abi.encodePacked(proposals[winningProposals[i]].name)));
+            winnerNames_ = string.concat(winnerNames_,", ",string(abi.encodePacked(proposals[winningProposals[i]].name)));
         }
     }
 

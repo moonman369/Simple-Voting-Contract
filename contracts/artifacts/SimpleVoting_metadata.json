@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.7+commit.e28d00a7"
+		"version": "0.8.13+commit.abaa5c0e"
 	},
 	"language": "Solidity",
 	"output": {
@@ -290,11 +290,11 @@
 	},
 	"sources": {
 		"contracts/SimpleVoting.sol": {
-			"keccak256": "0xf901955327ead0fbb66fddbec04980c55d24c059bb5b4cf6deb21d2c190cb87b",
+			"keccak256": "0xc67c6aa701f7924d2a49ed2720cabb0d94579243d3b013ede721788601aaf1ad",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e1852558adfee753e778cd20ba166929ffe8058fa05543df33b0b006147e2d34",
-				"dweb:/ipfs/QmVS7Zf7gjFoS62XqqnKu8VAGRUuZ7CKoSeuZWC9bdH4at"
+				"bzz-raw://79e80dd0ef684ecb3cd80d327df210f12c64519ed4ba8fb262295fc05be86885",
+				"dweb:/ipfs/QmbCi2hZ4tn7LAeV6aWc7VkAt4ydbgzGvGNwh9tfkWbSx9"
 			]
 		},
 		"https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Context.sol": {
