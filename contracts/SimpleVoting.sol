@@ -41,8 +41,11 @@ contract SimpleVoting is Context {
 
     event VoteCasted (uint256 indexed _proposal, address indexed _voter, uint256 _votesAdded);    // event to broadcast the casting of a vote
 
-    event DelegationSuccessful (address indexed _from, address indexed _to);
+    event DelegationSuccessful (address indexed _from, address indexed _to);    // event to broadcast a delegation
 
+    /** 
+     * @dev Modifier: Checks if a voter has not voted yet, reverts if voted.
+     */
     modifier onlyChairPerson () {
          require(
             _msgSender() == chairPerson,
@@ -51,6 +54,10 @@ contract SimpleVoting is Context {
         _;
      }
 
+    /** 
+     * @dev Modifier: Checks if a voter has not voted yet, reverts if voted.
+     * @param _voter address of the voter
+     */
     modifier notYetVoted (address _voter) {
          require(
             !voters[_voter].voted,
@@ -59,6 +66,10 @@ contract SimpleVoting is Context {
         _;
     }
 
+    /** 
+     * @dev Modifier: Checks if a proposal exists in the proposals array.
+     * @param _proposalIndex proposal index
+     */
     modifier proposalExists (uint256 _proposalIndex) {
         require (
             _proposalIndex < proposalCount, 
@@ -67,6 +78,10 @@ contract SimpleVoting is Context {
         _;
     }
 
+    /** 
+     * @dev Modifier: Checks if a voter has right to vote, reverts if not.
+     * @param _voter address of the voter
+     */
     modifier hasRightToVote (address _voter) {
         require (
             voters[_voter].weight > 0,
@@ -79,20 +94,19 @@ contract SimpleVoting is Context {
 
     /** 
      * @dev Create a new ballot to choose one of 'proposalNames'.
-     * @param proposalNames names of proposals
+     * @param proposalNames array of names (string) of proposals
      */
     constructor(string[] memory proposalNames) {
         chairPerson = _msgSender();
         voters[chairPerson].weight = 1;
         proposalCount = proposalNames.length;
         for (uint i = 0; i < proposalCount; i = i. add(1)) {
-            // 'Proposal({...})' creates a temporary
-            // Proposal object and 'proposals.push(...)'
-            // appends it to the end of 'proposals'.
+            // Instance of 'Proposal' type is created
+            // .push() appends it to the end of 'proposals' array.
             Proposal memory proposal = Proposal (stringToBytes32(proposalNames[i]), 0);
             proposals.push(proposal);
         }
-        emit VotingStarted (chairPerson, proposalCount);
+        emit VotingStarted (chairPerson, proposalCount); // broadcasting event
     }
 
     function getProposal (uint256 _proposalIndex) public view proposalExists(_proposalIndex) returns (string memory proposalName_, uint256 voteCount_) {

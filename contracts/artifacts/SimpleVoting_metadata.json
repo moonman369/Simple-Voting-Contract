@@ -246,7 +246,7 @@
 				"constructor": {
 					"details": "Create a new ballot to choose one of 'proposalNames'.",
 					"params": {
-						"proposalNames": "names of proposals"
+						"proposalNames": "array of names (string) of proposals"
 					}
 				},
 				"delegate(address)": {
@@ -300,11 +300,11 @@
 	},
 	"sources": {
 		"contracts/SimpleVoting.sol": {
-			"keccak256": "0x566620407cf4a852255dde87fbe107a3295c941af4b6df090719a549e723057a",
+			"keccak256": "0x00c585917315ecbd678869fad525ecc9209156fc567f9d0aac1014628a010cc4",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://4f123e88582ba79ef39394f3623c66263dbb33383d4308776560608b6c440e81",
-				"dweb:/ipfs/QmcJJVFn6V5MQrag8SXD9zQvABWpZdvqHDUUVG25eTQ3jR"
+				"bzz-raw://20545a5b42a4a880d28fb614d5cc85f49ef0373a44997dcc560639ef20e0e788",
+				"dweb:/ipfs/Qmb2ReziGnbsWLPi6i26CSwAgC3GL7Cm2KYyWkcJgf6kio"
 			]
 		},
 		"https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Context.sol": {
