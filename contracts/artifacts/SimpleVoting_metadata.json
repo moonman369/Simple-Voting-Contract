@@ -255,6 +255,22 @@
 						"_to": "address to which vote is delegated"
 					}
 				},
+				"getProposal(uint256)": {
+					"details": "Returns the name(string) and vote count proposal present at the passed proposal index.",
+					"params": {
+						"_proposalIndex": "index of the desired proposal in the 'proposals' array."
+					},
+					"returns": {
+						"proposalName_": "",
+						"voteCount_": " "
+					}
+				},
+				"getWinningProposals()": {
+					"details": "Return ALL the winning proposals (proposals with maximum votes)",
+					"returns": {
+						"_0": "winningProposals [] array containing All the winning proposals"
+					}
+				},
 				"giveRightToVote(address)": {
 					"details": "Give 'voter' the right to vote on this ballot. May only be called by 'chairPerson'.",
 					"params": {
@@ -300,11 +316,11 @@
 	},
 	"sources": {
 		"contracts/SimpleVoting.sol": {
-			"keccak256": "0x00c585917315ecbd678869fad525ecc9209156fc567f9d0aac1014628a010cc4",
+			"keccak256": "0xa56c63ff8a01ad723e632aa3bdf0ee04ce7ab9b3b8117b906f5651c450b97773",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://20545a5b42a4a880d28fb614d5cc85f49ef0373a44997dcc560639ef20e0e788",
-				"dweb:/ipfs/Qmb2ReziGnbsWLPi6i26CSwAgC3GL7Cm2KYyWkcJgf6kio"
+				"bzz-raw://f31e61d47a8d02fdfd69af09ca0f6fabcc3a2ca4b072ce9bfd2f34b5c0e1e445",
+				"dweb:/ipfs/QmaAojayssXVrLzmKLscEHr4YZ1F5wJycXdHT2wvcbYcEJ"
 			]
 		},
 		"https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Context.sol": {

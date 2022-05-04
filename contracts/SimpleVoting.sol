@@ -109,11 +109,23 @@ contract SimpleVoting is Context {
         emit VotingStarted (chairPerson, proposalCount); // broadcasting event
     }
 
+    /** 
+     * @dev Returns the name(string) and vote count proposal present at the passed proposal index.
+     * @param _proposalIndex index of the desired proposal in the 'proposals' array.
+     * @return proposalName_ 
+     * @return voteCount_  
+     */
     function getProposal (uint256 _proposalIndex) public view proposalExists(_proposalIndex) returns (string memory proposalName_, uint256 voteCount_) {
+        // Using multiple assignment and optional return statement feature of solidity
+        // bytes32ToString converts Proposals.name (bytes32) to proposalName_ (string) for readabilty of output
         (proposalName_, voteCount_) = 
         (bytes32ToString (proposals[_proposalIndex].name), proposals[_proposalIndex].voteCount);
     }
 
+    /** 
+     * @dev Return ALL the winning proposals (proposals with maximum votes)
+     * @return winningProposals [] array containing All the winning proposals
+     */
     function getWinningProposals () public view returns (uint256[] memory){
         return winningProposals;
     } 
