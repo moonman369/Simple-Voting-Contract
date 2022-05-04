@@ -117,80 +117,106 @@ contract SimpleVoting is Context {
      * @return proposalName_ 
      * @return voteCount_  
      */
-    function getProposal (uint256 _proposalIndex) public view proposalExists(_proposalIndex) returns (string memory proposalName_, uint256 voteCount_) {
-        // Using multiple assignment and optional return statement feature of solidity
-        // bytes32ToString converts Proposals.name (bytes32) to proposalName_ (string) for readabilty of output
-        (proposalName_, voteCount_) = 
-        (bytes32ToString (proposals[_proposalIndex].name), proposals[_proposalIndex].voteCount);
-    }
+    function getProposal (uint256 _proposalIndex) 
+        public 
+        view 
+        proposalExists(_proposalIndex) 
+        returns (string memory proposalName_, uint256 voteCount_) 
+        {
+            // Using multiple assignment and optional return statement feature of solidity
+            // bytes32ToString converts Proposals.name (bytes32) to proposalName_ (string) for readabilty of output
+            (proposalName_, voteCount_) = 
+            (bytes32ToString (proposals[_proposalIndex].name), proposals[_proposalIndex].voteCount);
+        }
 
     /** 
      * @dev Return ALL the winning proposals (proposals with maximum votes)
      * @return winningProposals [] array containing All the winning proposals
      */
-    function getWinningProposals () public view returns (uint256[] memory){
-        return winningProposals;
-    } 
+    function getWinningProposals () 
+        public 
+        view 
+        returns (uint256[] memory)
+        {
+            return winningProposals;
+        } 
     
     /** 
      * @dev Give 'voter' the right to vote on this ballot. May only be called by 'chairPerson'.
      * @param _voter address of voter
      */
-    function giveRightToVote(address _voter) public onlyChairPerson() notYetVoted(_voter) {
-        require(voters[_voter].weight == 0, "SimpleVoting: Address already has right to vote.");
-        voters[_voter].weight = 1;
-    }
+    function giveRightToVote(address _voter) 
+        public 
+        onlyChairPerson() 
+        notYetVoted(_voter) 
+        {
+            require(voters[_voter].weight == 0, "SimpleVoting: Address already has right to vote.");
+            voters[_voter].weight = 1;
+        }
 
     /** 
      * @dev Transfer chairpersonship to another 'voter'. May only be called by the current 'chairPerson'.
      * @param _to address of the new intended chair person
      */
-    function transferChairpersonship (address _to) public onlyChairPerson() hasRightToVote(_to) {
-        chairPerson = _to;
-        emit chairPersonChanged (_msgSender(), _to);
-    } 
+    function transferChairpersonship (address _to) 
+        public 
+        onlyChairPerson() 
+        hasRightToVote(_to) 
+        {
+            chairPerson = _to;
+            emit chairPersonChanged (_msgSender(), _to);
+        } 
 
     /**
      * @dev Delegate your vote to the voter 'to'.
      * @param _to address to which vote is delegated
      */
-    function delegate(address _to) public notYetVoted (_msgSender()) hasRightToVote (_msgSender()) {
-        Voter storage sender = voters[_msgSender()];
-        require (_to != _msgSender(), "SimpleVoting: Self-delegation is not allowed.");
+    function delegate(address _to) 
+        public 
+        notYetVoted (_msgSender()) 
+        hasRightToVote (_msgSender()) 
+        {
+            Voter storage sender = voters[_msgSender()];
+            require (_to != _msgSender(), "SimpleVoting: Self-delegation is not allowed.");
 
-        while (voters[_to].delegate != address(0)) {
-            _to = voters[_to].delegate;
+            while (voters[_to].delegate != address(0)) {
+                _to = voters[_to].delegate;
 
-            // Found a loop in the delegation, not allowed.
-            require(_to != _msgSender(), "SimpleVoting: Delegation traces back to caller.");
+                // Found a loop in the delegation, not allowed.
+                require(_to != _msgSender(), "SimpleVoting: Delegation traces back to caller.");
+            }
+            sender.voted = true;
+            sender.delegate = _to;
+            Voter storage delegate_ = voters[_to];
+            if (delegate_.voted) {
+                // If the delegate already voted,
+                // directly add to the number of votes
+                proposals[delegate_.vote].voteCount = proposals[delegate_.vote].voteCount. add(sender.weight);
+            } else {
+                // If the delegate did not vote yet,
+                // add to her weight.
+                delegate_.weight = delegate_.weight. add(sender.weight);
+            }
+
+            emit DelegationSuccessful (_msgSender(), _to);
         }
-        sender.voted = true;
-        sender.delegate = _to;
-        Voter storage delegate_ = voters[_to];
-        if (delegate_.voted) {
-            // If the delegate already voted,
-            // directly add to the number of votes
-            proposals[delegate_.vote].voteCount = proposals[delegate_.vote].voteCount. add(sender.weight);
-        } else {
-            // If the delegate did not vote yet,
-            // add to her weight.
-            delegate_.weight = delegate_.weight. add(sender.weight);
-        }
-
-        emit DelegationSuccessful (_msgSender(), _to);
-    }
 
     /**
      * @dev Give your vote (including votes delegated to you) to proposal 'proposals[proposal].name'.
      * @param proposal index of proposal in the proposals array
      */
-    function vote(uint proposal) public proposalExists(proposal) notYetVoted(_msgSender()) hasRightToVote(_msgSender()) {
-        Voter storage sender = voters[_msgSender()];
-        sender.voted = true;
-        sender.vote = proposal;
-        proposals[proposal].voteCount = proposals[proposal].voteCount. add(sender.weight);
-        emit VoteCasted (proposal, _msgSender(), sender.weight);
-    }
+    function vote(uint proposal) 
+        public 
+        proposalExists(proposal)   
+        notYetVoted(_msgSender()) 
+        hasRightToVote(_msgSender()) 
+        {
+            Voter storage sender = voters[_msgSender()];
+            sender.voted = true;
+            sender.vote = proposal;
+            proposals[proposal].voteCount = proposals[proposal].voteCount. add(sender.weight);
+            emit VoteCasted (proposal, _msgSender(), sender.weight);
+        }
 
     /** 
      * @dev Computes the winning proposal taking all previous votes into account.
@@ -216,13 +242,15 @@ contract SimpleVoting is Context {
      * @dev Converts the name/s of the winning proposals from bytes32 to string and returns them
      * @return winnerNames_ the name/s of the winner
      */
-    function winnerNames() public view
-            returns (string memory winnerNames_)
-    {
-        for (uint256 i = 0; i < winningProposals.length; i = i. add(1)) {
-            winnerNames_ = string.concat(winnerNames_,", ",string(abi.encodePacked(proposals[winningProposals[i]].name)));
+    function winnerNames() 
+        public 
+        view
+        returns (string memory winnerNames_)
+        {
+            for (uint256 i = 0; i < winningProposals.length; i = i. add(1)) {
+                winnerNames_ = string.concat(winnerNames_,", ",string(abi.encodePacked(proposals[winningProposals[i]].name)));
+            }
         }
-    }
 
     /** 
      * @dev Converts from string to bytes32 and returns the result
