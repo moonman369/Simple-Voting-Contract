@@ -135,14 +135,6 @@ contract SimpleVoting is Context {
      * @param _voter address of voter
      */
     function giveRightToVote(address _voter) public onlyChairPerson() notYetVoted(_voter) {
-        // require(
-        //     _msgSender() == chairPerson,
-        //     "Only chairPerson can give right to vote."
-        // );
-        // require(
-        //     !voters[_voter].voted,
-        //     "The voter already voted."
-        // );
         require(voters[_voter].weight == 0, "SimpleVoting: Address already has right to vote.");
         voters[_voter].weight = 1;
     }
@@ -152,15 +144,13 @@ contract SimpleVoting is Context {
      * @param _to address to which vote is delegated
      */
     function delegate(address _to) public notYetVoted (_msgSender()) hasRightToVote (_msgSender()) {
-        // require (voters[_msgSender()].weight > 0, "SimpleVoting: Caller does not have right to vote.");
         Voter storage sender = voters[_msgSender()];
-        //require(!sender.voted, "You already voted.");
         require (_to != _msgSender(), "SimpleVoting: Self-delegation is not allowed.");
 
         while (voters[_to].delegate != address(0)) {
             _to = voters[_to].delegate;
 
-            // We found a loop in the delegation, not allowed.
+            // Found a loop in the delegation, not allowed.
             require(_to != _msgSender(), "SimpleVoting: Delegation traces back to caller.");
         }
         sender.voted = true;
@@ -185,16 +175,9 @@ contract SimpleVoting is Context {
      */
     function vote(uint proposal) public proposalExists(proposal) notYetVoted(_msgSender()) hasRightToVote(_msgSender()) {
         Voter storage sender = voters[_msgSender()];
-        // require(sender.weight != 0, "SimpleVoting: Caller has no right to vote");
-        // require(!sender.voted, "SimpleVoting: Voter has already casted their vote.");
         sender.voted = true;
         sender.vote = proposal;
-
-        // If 'proposal' is out of the range of the array,
-        // this will throw automatically and revert all
-        // changes.
         proposals[proposal].voteCount = proposals[proposal].voteCount. add(sender.weight);
-
         emit VoteCasted (proposal, _msgSender(), sender.weight);
     }
 
@@ -219,8 +202,8 @@ contract SimpleVoting is Context {
     }
 
     /** 
-     * @dev Calls winningProposal() function to get the index of the winner contained in the proposals array and then
-     * @return winnerNames_ the name of the winner
+     * @dev Converts the name/s of the winning proposals from bytes32 to string and returns them
+     * @return winnerNames_ the name/s of the winner
      */
     function winnerNames() public view
             returns (string memory winnerNames_)
@@ -230,6 +213,11 @@ contract SimpleVoting is Context {
         }
     }
 
+    /** 
+     * @dev Converts from string to bytes32 and returns the result
+     * @param str a string
+     * @return bytes32 version of str
+     */
     function stringToBytes32 (string memory str) 
     internal 
     pure
@@ -238,6 +226,11 @@ contract SimpleVoting is Context {
         return bytes32(abi.encodePacked(str));
     }
 
+    /** 
+     * @dev Converts from bytes32 to string and returns the result
+     * @param byt a bytes32 value
+     * @return string version of byt
+     */
     function bytes32ToString(bytes32 byt) 
     internal 
     pure

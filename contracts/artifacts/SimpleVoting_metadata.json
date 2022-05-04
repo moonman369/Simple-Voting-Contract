@@ -284,9 +284,9 @@
 					}
 				},
 				"winnerNames()": {
-					"details": "Calls winningProposal() function to get the index of the winner contained in the proposals array and then",
+					"details": "Converts the name/s of the winning proposals from bytes32 to string and returns them",
 					"returns": {
-						"winnerNames_": "the name of the winner"
+						"winnerNames_": "the name/s of the winner"
 					}
 				}
 			},
@@ -316,11 +316,11 @@
 	},
 	"sources": {
 		"contracts/SimpleVoting.sol": {
-			"keccak256": "0xa56c63ff8a01ad723e632aa3bdf0ee04ce7ab9b3b8117b906f5651c450b97773",
+			"keccak256": "0x0ac985c1283ab63ae0679b1889f215567c6b7efa0541c06189deb765e4eac00f",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://f31e61d47a8d02fdfd69af09ca0f6fabcc3a2ca4b072ce9bfd2f34b5c0e1e445",
-				"dweb:/ipfs/QmaAojayssXVrLzmKLscEHr4YZ1F5wJycXdHT2wvcbYcEJ"
+				"bzz-raw://adbf019940fc257d59918b5e83c28b3d3908b82144d61a57d9c91ce972165eb0",
+				"dweb:/ipfs/QmNetFDGeNfd8f8XFpj6vedRf45JQxDDxvKFc5opVPaF8V"
 			]
 		},
 		"https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Context.sol": {
