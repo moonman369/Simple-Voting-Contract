@@ -43,6 +43,8 @@ contract SimpleVoting is Context {
 
     event DelegationSuccessful (address indexed _from, address indexed _to);    // event to broadcast a delegation
 
+    event chairPersonChanged (address indexed _from, address indexed _to);      // event to broadcast a transfer of Chairpersonship
+
     /** 
      * @dev Modifier: Checks if a voter has not voted yet, reverts if voted.
      */
@@ -85,7 +87,7 @@ contract SimpleVoting is Context {
     modifier hasRightToVote (address _voter) {
         require (
             voters[_voter].weight > 0,
-            "SimpleVoting: Caller does not have right to vote."
+            "SimpleVoting: Address does not have right to vote."
         );
         _;
     }
@@ -138,6 +140,15 @@ contract SimpleVoting is Context {
         require(voters[_voter].weight == 0, "SimpleVoting: Address already has right to vote.");
         voters[_voter].weight = 1;
     }
+
+    /** 
+     * @dev Transfer chairpersonship to another 'voter'. May only be called by the current 'chairPerson'.
+     * @param _to address of the new intended chair person
+     */
+    function transferChairpersonship (address _to) public onlyChairPerson() hasRightToVote(_to) {
+        chairPerson = _to;
+        emit chairPersonChanged (_msgSender(), _to);
+    } 
 
     /**
      * @dev Delegate your vote to the voter 'to'.

@@ -80,6 +80,25 @@
 				"type": "event"
 			},
 			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_from",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					}
+				],
+				"name": "chairPersonChanged",
+				"type": "event"
+			},
+			{
 				"inputs": [],
 				"name": "chairPerson",
 				"outputs": [
@@ -173,6 +192,19 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					}
+				],
+				"name": "transferChairpersonship",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -277,6 +309,12 @@
 						"_voter": "address of voter"
 					}
 				},
+				"transferChairpersonship(address)": {
+					"details": "Transfer chairpersonship to another 'voter'. May only be called by the current 'chairPerson'.",
+					"params": {
+						"_to": "address of the new intended chair person"
+					}
+				},
 				"vote(uint256)": {
 					"details": "Give your vote (including votes delegated to you) to proposal 'proposals[proposal].name'.",
 					"params": {
@@ -316,11 +354,11 @@
 	},
 	"sources": {
 		"contracts/SimpleVoting.sol": {
-			"keccak256": "0x0ac985c1283ab63ae0679b1889f215567c6b7efa0541c06189deb765e4eac00f",
+			"keccak256": "0x14a6236f628faefab92860c89c54c842752d4ef2519728a672c45de1fcf1ef6e",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://adbf019940fc257d59918b5e83c28b3d3908b82144d61a57d9c91ce972165eb0",
-				"dweb:/ipfs/QmNetFDGeNfd8f8XFpj6vedRf45JQxDDxvKFc5opVPaF8V"
+				"bzz-raw://b8eca519b2470ab3defa01008f926582d4fb8da6f86611440bcfce4d0cdd2ce0",
+				"dweb:/ipfs/QmcmTQ5VCYPVN9i9qxArcRWiJTj4VoQUftiBHaZFRxRaMY"
 			]
 		},
 		"https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Context.sol": {
