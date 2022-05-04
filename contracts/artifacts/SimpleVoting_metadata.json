@@ -80,6 +80,25 @@
 				"type": "event"
 			},
 			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_from",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					}
+				],
+				"name": "chairPersonChanged",
+				"type": "event"
+			},
+			{
 				"inputs": [],
 				"name": "chairPerson",
 				"outputs": [
@@ -178,6 +197,19 @@
 			{
 				"inputs": [
 					{
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					}
+				],
+				"name": "transferChairpersonship",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "uint256",
 						"name": "proposal",
 						"type": "uint256"
@@ -255,10 +287,32 @@
 						"_to": "address to which vote is delegated"
 					}
 				},
+				"getProposal(uint256)": {
+					"details": "Returns the name(string) and vote count proposal present at the passed proposal index.",
+					"params": {
+						"_proposalIndex": "index of the desired proposal in the 'proposals' array."
+					},
+					"returns": {
+						"proposalName_": "",
+						"voteCount_": " "
+					}
+				},
+				"getWinningProposals()": {
+					"details": "Return ALL the winning proposals (proposals with maximum votes)",
+					"returns": {
+						"_0": "winningProposals [] array containing All the winning proposals"
+					}
+				},
 				"giveRightToVote(address)": {
 					"details": "Give 'voter' the right to vote on this ballot. May only be called by 'chairPerson'.",
 					"params": {
 						"_voter": "address of voter"
+					}
+				},
+				"transferChairpersonship(address)": {
+					"details": "Transfer chairpersonship to another 'voter'. May only be called by the current 'chairPerson'.",
+					"params": {
+						"_to": "address of the new intended chair person"
 					}
 				},
 				"vote(uint256)": {
@@ -268,9 +322,9 @@
 					}
 				},
 				"winnerNames()": {
-					"details": "Calls winningProposal() function to get the index of the winner contained in the proposals array and then",
+					"details": "Converts the name/s of the winning proposals from bytes32 to string and returns them",
 					"returns": {
-						"winnerNames_": "the name of the winner"
+						"winnerNames_": "the name/s of the winner"
 					}
 				}
 			},
@@ -300,11 +354,11 @@
 	},
 	"sources": {
 		"contracts/SimpleVoting.sol": {
-			"keccak256": "0x00c585917315ecbd678869fad525ecc9209156fc567f9d0aac1014628a010cc4",
+			"keccak256": "0xda30d9e0482a7e8d4ef41441c798d33804d6fc4c77cb7d6988ee7d957658ac47",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://20545a5b42a4a880d28fb614d5cc85f49ef0373a44997dcc560639ef20e0e788",
-				"dweb:/ipfs/Qmb2ReziGnbsWLPi6i26CSwAgC3GL7Cm2KYyWkcJgf6kio"
+				"bzz-raw://07b602e659051ee8f3fb48394169dcf07c4a31d3c013f8b31b9b7c8644f8a5d7",
+				"dweb:/ipfs/Qma5JdQvf7a1A74EAa3myZkfxrApBrPFm5p4ZjiRfNWKkY"
 			]
 		},
 		"https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Context.sol": {
