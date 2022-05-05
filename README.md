@@ -35,4 +35,5 @@ Apart from the above mentioned basic features, that are already implemented in `
 * **Multiple** `modifiers`: Using the same conditional [require (...)] statements in every function over and over seemed redundant, hence made the code `DRY`.
 * **Modified I/O from** `bytes32` **to** `string`: This was done to improve the readabilty and UX while keeping the gas as low as possible. This was made possible by 2 functions:
     - `stringToBytes32 ()`: To convert string to bytes32 value at input.
-    - `bytes32ToString ()`: To convert bytes32 to string value at output
+    - `bytes32ToString ()`: To convert bytes32 to string value at output.
+* **Added** `change chairperson` **functionality**: Thought it would be nice to have this feature. Can only be called by the `acting chairperson`.
