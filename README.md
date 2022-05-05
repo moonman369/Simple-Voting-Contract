@@ -2,6 +2,7 @@
 
 
 ![Built With](https://img.shields.io/badge/built%20with-SOLIDITY-blueviolet)
+![Powered By](https://img.shields.io/badge/powered%20by-ETHEREUM-yellow)
 ![GitHub repo size](https://img.shields.io/github/repo-size/moonman369/Simple-Voting-contract)
 ![GitHub](https://img.shields.io/github/license/moonman369/Simple-Voting-Contract)
 ![GitHub language count](https://img.shields.io/github/languages/count/moonman369/Simple-Voting-Contract)
