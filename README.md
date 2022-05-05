@@ -1,4 +1,5 @@
-![📗_Simple_Voting_Contract](https://user-images.githubusercontent.com/100613640/166901927-f34d953d-08f9-4c6a-b030-f9fb1f42ba25.png)
+![📗_Simple_Voting_Contract (1)](https://user-images.githubusercontent.com/100613640/166902669-a5f81a2d-80d4-4e09-9a9f-04c569945436.png)
+
 ![GitHub repo size](https://img.shields.io/github/repo-size/moonman369/Simple-Voting-contract)
 
 # Simple-Voting-Contract
