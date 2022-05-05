@@ -7,13 +7,13 @@
 ![GitHub top language](https://img.shields.io/github/languages/top/moonman369/Simple-Voting-Contract)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/moonman369/Simple-Voting-Contract)
 
-
+<br>
 # Basic Overview
 
 This is a simple EVM compatible voting smart contract built using solidity. This contract is based on the famous `3_Ballot.sol` contract that is provided by  `Remix IDE` as an example.
 This contract basically implements different functions for every action that takes place in a Voting Ballot. Also, it is important to note that there were certain drawbacks in the `Ballot.sol` contract, that I targeted and duly fixed in my `SimpleVoting.sol` contract.
 
-
+<br>
 # Key Features
 
 So, as we know, a basic voting contract has the following functionalities:
