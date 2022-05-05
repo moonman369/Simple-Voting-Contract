@@ -5,6 +5,7 @@
 ![GitHub](https://img.shields.io/github/license/moonman369/Simple-Voting-Contract)
 ![GitHub language count](https://img.shields.io/github/languages/count/moonman369/Simple-Voting-Contract)
 ![GitHub top language](https://img.shields.io/github/languages/top/moonman369/Simple-Voting-Contract)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/moonman369/Simple-Voting-Contract)
 
 # Simple-Voting-Contract
 This is a simple voting smart contract built using solidity. This contract is based on the famous `3_Ballot.sol` contract that is provided by  `Remix IDE` as an example.
