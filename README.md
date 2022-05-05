@@ -1,6 +1,7 @@
 ![_Simple_Voting_Contract (1)](https://user-images.githubusercontent.com/100613640/166903388-d273b1e4-7874-4312-87a7-062d20a27e82.png)
 
 
+![Built With](https://img.shields.io/badge/built%20with-SOLIDITY-blueviolet)
 ![GitHub repo size](https://img.shields.io/github/repo-size/moonman369/Simple-Voting-contract)
 ![GitHub](https://img.shields.io/github/license/moonman369/Simple-Voting-Contract)
 ![GitHub language count](https://img.shields.io/github/languages/count/moonman369/Simple-Voting-Contract)
@@ -71,7 +72,10 @@ Apart from the above mentioned basic features, that are already implemented in `
     ![image](https://user-images.githubusercontent.com/100613640/166986903-8033bfc9-d449-41f8-bb91-609c4d801945.png)<br>
 
     * `getWinnerNames ()`: Getter function to display winning proposal names as a `string`. Uses `bytes32ToString ()`.
-    ![image](https://user-images.githubusercontent.com/100613640/166987619-7861573a-9857-4da2-8feb-b067ee24be77.png)<br>
+    ![image](https://user-images.githubusercontent.com/100613640/166987619-7861573a-9857-4da2-8feb-b067ee24be77.png)<br><br>
 
 
-# 
+# Contributing
+1. Clone repo and create a new branch `$ git checkout https://github.com/moonman369/Simple-Voting-Contract -b <name_of_new_branch>`.
+2. Make changes and test.
+3. Submit Pull Request with a comprehensive description of changes and modifications.
