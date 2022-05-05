@@ -33,7 +33,12 @@ Apart from the above mentioned basic features, that are already implemented in `
 * **Use of** `openzepplin/contracts`: This makes my contract safe, efficient and immune to future releases and changes to Solidity itself.
 * **Additional** `getters and public variables`: To better monitor the state of my contract.
 * **Multiple** `modifiers`: Using the same conditional [require (...)] statements in every function over and over seemed redundant, hence made the code `DRY`.
-* **Modified I/O from** `bytes32` **to** `string`: This was done to improve the readabilty and UX while keeping the gas as low as possible. This was made possible by 2 functions:
+* **Modified I/O from** `bytes32` **to** `string`: This was done to improve the readabilty and UX while keeping the gas as low as possible. This was made possible by 2 internal functions:
     - `stringToBytes32 ()`: To convert string to bytes32 value at input.
     - `bytes32ToString ()`: To convert bytes32 to string value at output.
 * **Added** `change chairperson` **functionality**: Thought it would be nice to have this feature. Can only be called by the `acting chairperson`.
+* **Added** `multiple winning proposals` **feature**: One of the biggest drawbacks of the `Ballot.sol` contract is that it assumes that there will always be only one winning proposal in every voting session, which is not very practical. So, I added provision to check for, compute and return multiple winning proposals if necessary. The necessary code elements are listed below:
+    - `winningProposals []`: An array to store the indices of all the winning proposals.
+    - `computeWinningProposals ()`: A public function to compute the and add the winning proposals' indices to the above array. Callable only by chairperson.
+    - `getWinningProposals ()`: Getter function to display all the winning proposal indices.
+    - `getWinnerNames ()`: Getter function to display winning proposal names as a `string`. Uses `bytes32ToString ()`.
