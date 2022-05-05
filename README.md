@@ -24,3 +24,12 @@ So, as we know, a basic voting contract has the following functionalities:
 - `Vote`: The most pivotal functionality possessed by a voting contract, can be called by any address with a right to vote.
 - `Delegate`: A very interesting property that allows a voter to themselves abstain from voting and transfer that vote to another voter.
 - `Compute and display winning proposal`: To compute and display the details of the winning proposal at the end of the voting process.
+
+
+<br>
+
+# Improvements and Modifications
+Apart from the above mentioned basic features, that are already implemented in `Ballot.sol`, the following are some additional features introduced by me in `SimpleVoting.sol`:
+- **Use of** `openzepplin/contracts`: This makes my contract safe, efficient and immune to future releases and changes to Solidity itself.
+- **Additional** `getters and public variables`: To better monitor the state of my contract.
+- **Multiple** `modifiers`: Using the same conditional [require (...)]  
