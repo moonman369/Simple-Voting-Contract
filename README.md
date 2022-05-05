@@ -19,17 +19,20 @@ This contract basically implements different functions for every action that tak
 # Key Features
 
 So, as we know, a basic voting contract has the following functionalities:
-- `Creation of Voting Ballot`: Where all the competing proposals and the Chairperson of the Ballot are set
-- `Give Right to Vote`: Which can only be called by the Chairperson of the Voting Ballot.
-- `Vote`: The most pivotal functionality possessed by a voting contract, can be called by any address with a right to vote.
-- `Delegate`: A very interesting property that allows a voter to themselves abstain from voting and transfer that vote to another voter.
-- `Compute and display winning proposal`: To compute and display the details of the winning proposal at the end of the voting process.
+* `Creation of Voting Ballot`: Where all the competing proposals and the Chairperson of the Ballot are set
+* `Give Right to Vote`: Which can only be called by the Chairperson of the Voting Ballot.
+* `Vote`: The most pivotal functionality possessed by a voting contract, can be called by any address with a right to vote.
+* `Delegate`: A very interesting property that allows a voter to themselves abstain from voting and transfer that vote to another voter.
+* `Compute and display winning proposal`: To compute and display the details of the winning proposal at the end of the voting process.
 
 
 <br>
 
 # Improvements and Modifications
 Apart from the above mentioned basic features, that are already implemented in `Ballot.sol`, the following are some additional features introduced by me in `SimpleVoting.sol`:
-- **Use of** `openzepplin/contracts`: This makes my contract safe, efficient and immune to future releases and changes to Solidity itself.
-- **Additional** `getters and public variables`: To better monitor the state of my contract.
-- **Multiple** `modifiers`: Using the same conditional [require (...)]  
+* **Use of** `openzepplin/contracts`: This makes my contract safe, efficient and immune to future releases and changes to Solidity itself.
+* **Additional** `getters and public variables`: To better monitor the state of my contract.
+* **Multiple** `modifiers`: Using the same conditional [require (...)] statements in every function over and over seemed redundant, hence made the code `DRY`.
+* **Modified I/O from** `bytes32` **to** `string`: This was done to improve the readabilty and UX while keeping the gas as low as possible. This was made possible by 2 functions:
+    - `stringToBytes32 ()`: To convert string to bytes32 value at input.
+    - `bytes32ToString ()`: To convert bytes32 to string value at output
