@@ -1,8 +1,12 @@
 ![_Simple_Voting_Contract (1)](https://user-images.githubusercontent.com/100613640/166903388-d273b1e4-7874-4312-87a7-062d20a27e82.png)
 
 
-![Built With](https://img.shields.io/badge/built%20with-SOLIDITY-blueviolet)
-![Powered By](https://img.shields.io/badge/powered%20by-ETHEREUM-yellow)
+
+![built-with-solidity](https://user-images.githubusercontent.com/100613640/167150935-9bf44561-6804-4425-83cb-f4f4f07624cc.svg)<br>
+![powered-by-ethereum](https://user-images.githubusercontent.com/100613640/167151814-6e0f548a-8e90-4b02-aed5-21b02f095e64.svg)<br>
+
+<!--![Built With](https://img.shields.io/badge/built%20with-SOLIDITY-blueviolet)
+![Powered By](https://img.shields.io/badge/powered%20by-ETHEREUM-yellow)-->
 ![GitHub repo size](https://img.shields.io/github/repo-size/moonman369/Simple-Voting-contract)
 ![GitHub](https://img.shields.io/github/license/moonman369/Simple-Voting-Contract)
 ![GitHub language count](https://img.shields.io/github/languages/count/moonman369/Simple-Voting-Contract)
