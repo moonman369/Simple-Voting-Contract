@@ -2,8 +2,8 @@
 
 
 
-![built-with-solidity](https://user-images.githubusercontent.com/100613640/167150935-9bf44561-6804-4425-83cb-f4f4f07624cc.svg)<br>
-![powered-by-ethereum](https://user-images.githubusercontent.com/100613640/167151814-6e0f548a-8e90-4b02-aed5-21b02f095e64.svg)<br>
+![built-with-solidity](https://user-images.githubusercontent.com/100613640/167150935-9bf44561-6804-4425-83cb-f4f4f07624cc.svg) &nbsp;&nbsp;&nbsp;
+![powered-by-ethereum (1)](https://user-images.githubusercontent.com/100613640/167155120-83cbd78a-d99d-47e5-98f9-89b320fd2be6.svg)<br>
 
 <!--![Built With](https://img.shields.io/badge/built%20with-SOLIDITY-blueviolet)
 ![Powered By](https://img.shields.io/badge/powered%20by-ETHEREUM-yellow)-->
